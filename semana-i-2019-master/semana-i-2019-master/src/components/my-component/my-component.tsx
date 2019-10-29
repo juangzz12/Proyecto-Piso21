@@ -1,4 +1,5 @@
 import {Component, Prop, h,Event ,EventEmitter, Method} from '@stencil/core';
+import {MovieService} from "./MovieSearch";
 
 @Component({
   tag: 'my-component',
@@ -6,6 +7,18 @@ import {Component, Prop, h,Event ,EventEmitter, Method} from '@stencil/core';
   shadow: true,
 })
 export class MyComponent {
+
+  async fetchMovies(): Promise<any> {
+    const responsePromise =  MovieService.getMoviesByKeywords(9, 0);
+    const dataResponse = await responsePromise;
+
+    /*let arrayJSON = [];
+    dataResponse.forEach(obj => {
+      arrayJSON.push(obj);
+    });*/
+    console.log(dataResponse);
+  }
+
   /**
    * The first name
    */
@@ -26,6 +39,7 @@ export class MyComponent {
 
   render() {
 
+    this.fetchMovies();
     const items = this.data.items;
 
     return (
