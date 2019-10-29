@@ -9,7 +9,7 @@ import {MovieService} from "./MovieSearch";
 export class MyComponent {
 
   async fetchMovies(): Promise<any> {
-    const responsePromise =  MovieService.getMoviesByKeywords(9, 0);
+    const responsePromise =  MovieService.getMoviesByKeywords();
     const dataResponse = await responsePromise;
 
     /*let arrayJSON = [];
@@ -28,6 +28,7 @@ export class MyComponent {
 
 
   @Method() async printConsoleLog(){
+    this.fetchMovies();
     console.log("method");
   }
 
@@ -38,8 +39,6 @@ export class MyComponent {
   }
 
   render() {
-
-    this.fetchMovies();
     const items = this.data.items;
 
     return (

@@ -4,8 +4,8 @@ export class MovieService {
 
   private static carbonldp: CarbonLDP = new CarbonLDP("https://data-itesm.lab.base22.com/");
 
-  static  async getMoviesByKeywords(keywordID: string): Promise<any> {
-    const rawResults = await this.carbonldp.documents.$get<any>('keywords/90/');
+  static  async getMoviesByKeywords(): Promise<any> {
+    const rawResults = await this.carbonldp.documents.$get('keywords/90/');
 
     return rawResults;
   }
