@@ -11,7 +11,8 @@ export class MovieService {
   }
 
   static async getKeyword(): Promise<any> {
-    const rawResutls = await this.carbonldp.documents.$getMembers<any>('keyword/');
+    const rawResutls = await this.carbonldp.documents.$getMembers('keywords/', _=>_
+      .limit(9).offset(0));
     return rawResutls;
   }
 

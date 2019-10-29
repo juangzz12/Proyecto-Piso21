@@ -9,7 +9,7 @@ import {MovieService} from "./MovieSearch";
 export class MyComponent {
 
   async fetchMovies(): Promise<any> {
-    const responsePromise =  MovieService.getMoviesByKeywords();
+    const responsePromise =  MovieService.getKeyword();
     const dataResponse = await responsePromise;
 
     /*let arrayJSON = [];
@@ -24,8 +24,6 @@ export class MyComponent {
    */
   @Prop() data: any = { items: []};
   @Prop() myTitle: string = "";
-
-
 
   @Method() async printConsoleLog(){
     this.fetchMovies();
