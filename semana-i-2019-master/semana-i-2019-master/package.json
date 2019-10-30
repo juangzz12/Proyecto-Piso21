@@ -29,6 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/node": "^12.11.7",
-    "carbonldp": "^5.2.0"
+    "carbonldp": "^5.2.0",
+    "rollup-plugin-node-polyfills": "^0.2.1"
   }
 }
