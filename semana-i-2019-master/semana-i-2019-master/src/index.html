@@ -16,13 +16,7 @@
   <script>
       customElements.whenDefined("my-component").then(()=>{
           document.querySelector("#myComponent").componentOnReady().then((componentInstance) => {
-              componentInstance.waitingForData([
-                  {keyword: "Art", weight: "20", link: "#"},
-                  {keyword: "War", weight: "30", link: "#"},
-                  {keyword: "Anime", weight: "40", link: "#"}
-                  ]
-              );
-              componentInstance.printConsoleLog();
+               componentInstance.printConsoleLog();
           });
       });
   </script>

@@ -11,12 +11,14 @@ export class MyComponent {
 
   @State() arrayKeywords: any [] = [];
 
-  @Method() async waitingForData(keyword: any []) {
+  @Method()  waitingForData(keyword: any []) {
     this.arrayKeywords = keyword;
+    console.log(this.arrayKeywords)
   }
 
   @Method() async printConsoleLog(){
-    MovieSearch.getWeightbyKeyword()
+    let variableArreglo = await MovieSearch.getWeightbyKeyword();
+    this.waitingForData(variableArreglo);
   }
  
 
@@ -50,8 +52,9 @@ export class MyComponent {
 
   render() {
 
-
+console.log(this.arrayKeywords.length);
     if(this.arrayKeywords.length > 0) {
+      console.log("render");
       return (
         <div>
           <div id="myCanvasContainer">
@@ -61,7 +64,7 @@ export class MyComponent {
           </div>
           <div id="tags">
             <ul>
-              {this.arrayKeywords.map((item) => (<li><a href={item.link} data-weight={item.weight}>{item.keyword}</a></li>))}
+              {this.arrayKeywords.map((item) => (<li><a href={item.link} data-weight={item.weight*.1}>{item.keyword}</a></li>))}
             </ul>
           </div>
         </div>
@@ -71,7 +74,8 @@ export class MyComponent {
 
   componentDidRender () {
     if(this.arrayKeywords.length > 0) {
-      this.addClass();
+      console.log('did')
+      this.addClass(); 
     }
   }
-}
+} 
