@@ -11,15 +11,20 @@
 </head>
 <body>
 
-  <my-component id="myComponent" my-title="Hello world!"></my-component>
+<my-component id="myComponent"></my-component>
 
   <script>
-    customElements.whenDefined("my-component").then(()=>{
-      document.querySelector("#myComponent").componentOnReady().then((componentInstance) => {
-        componentInstance.printConsoleLog();
+      customElements.whenDefined("my-component").then(()=>{
+          document.querySelector("#myComponent").componentOnReady().then((componentInstance) => {
+              componentInstance.waitingForData([
+                  {keyword: "Art", weight: "20", link: "#"},
+                  {keyword: "War", weight: "30", link: "#"},
+                  {keyword: "Anime", weight: "40", link: "#"}
+                  ]
+              );
+              componentInstance.printConsoleLog();
+          });
       });
-    });
-
   </script>
 </body>
 </html>
