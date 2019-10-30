@@ -1,4 +1,4 @@
-import {Component, Prop, h,Event ,EventEmitter, Method} from '@stencil/core';
+import {Component, Method} from '@stencil/core';
 import MovieSearch from "./MovieSearch";
 
 @Component({
@@ -7,22 +7,15 @@ import MovieSearch from "./MovieSearch";
   shadow: true,
 })
 export class MyComponent {
-  @Prop() data: any = { keyItems: []};
 
   @Method() async printConsoleLog(){
     MovieSearch.getWeightbyKeyword()
   }
 
-  @Event() myCustomEvent: EventEmitter;
-
-  private myEvent(item){
-    this.myCustomEvent.emit(item);
-  }
 
   public render():any {
-    const items = this.data.items;
      return;
-    
+
   }
 }
 

@@ -5,11 +5,13 @@ export default class MovieSearch {
     static async getWeightbyKeyword() {
         carbonldp.documents.$executeSELECTQuery(
             `
+            PREFIX educore: <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#>
+            PREFIX w3: <http://www.w3.org/2000/01/rdf-schema#>
             SELECT ?keyword ?label (COUNT(?label) AS ?count)
             WHERE {
                 <https://data-itesm.lab.base22.com/movies/> <http://www.w3.org/ns/ldp#contains> ?movie .
-                ?movie <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#Keyword> ?keyword .
-                ?keyword <http://www.w3.org/2000/01/rdf-schema#label> ?label .
+                ?movie educore:Keyword ?keyword .
+                ?keyword w3:label ?label .
             }
             GROUP BY ?keyword ?label
             ORDER BY DESC(?count)
