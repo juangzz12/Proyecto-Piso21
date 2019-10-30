@@ -1,19 +1,22 @@
 import {CarbonLDP} from "carbonldp";
+const carbonldp = new CarbonLDP("https://data-itesm.lab.base22.com/");
 
-export class MovieService {
-
-  private static carbonldp: CarbonLDP = new CarbonLDP("https://data-itesm.lab.base22.com/");
-
-  static  async getMoviesByKeywords(): Promise<any> {
-    const rawResults = await this.carbonldp.documents.$get('keywords/90/');
-
-    return rawResults;
-  }
-
-  static async getKeyword(): Promise<any> {
-    const rawResutls = await this.carbonldp.documents.$getMembers('keywords/', _=>_
-      .limit(9).offset(0));
-    return rawResutls;
-  }
-
+export default class SearchService {
+    static async getWeightbyKeyword() {
+        carbonldp.documents.$executeSELECTQuery(
+            `
+            SELECT ?keyword ?label (COUNT(?label) AS ?count)
+            WHERE {
+                <https://data-itesm.lab.base22.com/movies/> <http://www.w3.org/ns/ldp#contains> ?movie .
+                ?movie <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#Keyword> ?keyword .
+                ?keyword <http://www.w3.org/2000/01/rdf-schema#label> ?label .
+            }
+            GROUP BY ?keyword ?label
+            ORDER BY DESC(?count)
+            LIMIT 50
+            `
+        ).then((response) => {
+            console.log(response);
+        });
+    }
 }

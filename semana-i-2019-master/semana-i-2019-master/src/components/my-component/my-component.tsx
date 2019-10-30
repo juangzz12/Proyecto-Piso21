@@ -1,5 +1,5 @@
 import {Component, Prop, h,Event ,EventEmitter, Method} from '@stencil/core';
-import {MovieService} from "./MovieSearch";
+import SearchService from "./MovieSearch";
 
 @Component({
   tag: 'my-component',
@@ -7,27 +7,10 @@ import {MovieService} from "./MovieSearch";
   shadow: true,
 })
 export class MyComponent {
-
-  async fetchMovies(): Promise<any> {
-    const responsePromise =  MovieService.getKeyword();
-    const dataResponse = await responsePromise;
-
-    /*let arrayJSON = [];
-    dataResponse.forEach(obj => {
-      arrayJSON.push(obj);
-    });*/
-    console.log(dataResponse);
-  }
-
-  /**
-   * The first name
-   */
-  @Prop() data: any = { items: []};
-  @Prop() myTitle: string = "";
+  @Prop() data: any = { keyItems: []};
 
   @Method() async printConsoleLog(){
-    this.fetchMovies();
-    console.log("method");
+    SearchService.getWeightbyKeyword()
   }
 
   @Event() myCustomEvent: EventEmitter;
@@ -36,14 +19,10 @@ export class MyComponent {
     this.myCustomEvent.emit(item);
   }
 
-  render() {
+  public render():any {
     const items = this.data.items;
-
-    return (
-      <div class="my-class">
-        <h1>{this.myTitle}</h1>
-        {items.map((item)=> (<div onClick={() => this.myEvent(item)}>{item.name}</div>))}
-      </div>
-    );
+     return;
+    
   }
 }
+
