@@ -20,16 +20,17 @@ export default class MovieSearch {
             LIMIT 50
             `
         ).then((response) => {
-        	response.forEach((ob) => {
+         	response.bindings.forEach((ob) => {
         		let json = {
         			weight: ob.count,
         			keyword: ob.label,
-        			link: ob.$id
+        			link: ob.keyword.$id
         		}
-        		
+
         		arr.push(json)
         	});
-            console.log(arr);
         });
+
+        return arr;
     }
 }
