@@ -11,8 +11,12 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface MyComponent {
+    /**
+    * The first name
+    */
     'data': any;
-    'printConsoleLog': () => any;
+    'myTitle': string;
+    'printConsoleLog': () => Promise<void>;
   }
 }
 
@@ -31,7 +35,11 @@ declare global {
 
 declare namespace LocalJSX {
   interface MyComponent {
+    /**
+    * The first name
+    */
     'data'?: any;
+    'myTitle'?: string;
     'onMyCustomEvent'?: (event: CustomEvent<any>) => void;
   }
 
