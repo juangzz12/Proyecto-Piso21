@@ -3,6 +3,8 @@ const carbonldp = new CarbonLDP("https://data-itesm.lab.base22.com/");
 
 export default class MovieSearch {
     static async getWeightbyKeyword() {
+
+    	let arr: any[] = [];
         carbonldp.documents.$executeSELECTQuery(
             `
             PREFIX educore: <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#>
@@ -18,7 +20,17 @@ export default class MovieSearch {
             LIMIT 50
             `
         ).then((response) => {
-            console.log(response);
+         	response.bindings.forEach((ob) => {
+        		let json = {
+        			weight: ob.count,
+        			keyword: ob.label,
+        			link: ob.keyword.$id
+        		}
+
+        		arr.push(json)
+        	});
         });
+
+        return arr;
     }
 }
