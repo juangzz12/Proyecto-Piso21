@@ -1,5 +1,5 @@
 import {Component, Prop, h,Event ,EventEmitter, Method} from '@stencil/core';
-import SearchService from "./MovieSearch";
+import MovieSearch from "./MovieSearch";
 
 @Component({
   tag: 'my-component',
