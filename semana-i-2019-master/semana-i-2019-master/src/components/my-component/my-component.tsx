@@ -53,7 +53,7 @@ export class MyComponent {
   render() {
 
 console.log(this.arrayKeywords.length);
-    if(this.arrayKeywords.length > 0) {
+    console.log(this.arrayKeywords);
       console.log("render");
       return (
         <div>
@@ -69,13 +69,11 @@ console.log(this.arrayKeywords.length);
           </div>
         </div>
       );
-    }
   }
 
   componentDidRender () {
-    if(this.arrayKeywords.length > 0) {
       console.log('did')
       this.addClass(); 
-    }
+
   }
 } 
