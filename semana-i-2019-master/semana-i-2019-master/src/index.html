@@ -25,7 +25,8 @@
 		customElements.whenDefined("my-component").then(()=>{
 	      document.querySelector("#myComponent").componentOnReady().then((componentInstance) => {
 	      	componentInstance.getKeywords(howMany);
-	      });
+            componentInstance.addEventListener("onClickKeyword", (ev) => {console.log(ev.detail)});
+        });
 	    });
 	}
 	listSize.onchange= function(){
