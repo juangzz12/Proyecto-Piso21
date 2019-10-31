@@ -1,4 +1,4 @@
-import {Component, h, Method, Prop, State} from '@stencil/core';
+import {Component, h, Method, State} from '@stencil/core';
 import './Script.js';
 import MovieSearch from './MovieSearch';
 
@@ -9,22 +9,8 @@ import MovieSearch from './MovieSearch';
 })
 export class MyComponent {
 
-  @State() arrayKeywords: any [] = [];
-
-  @Method()  waitingForData(keyword: any []) {
-    this.arrayKeywords = keyword;
-    console.log(this.arrayKeywords)
-  }
-
-  @Method() async printConsoleLog(){
-    let variableArreglo = await MovieSearch.getWeightbyKeyword();
-    this.waitingForData(variableArreglo);
-  }
- 
-
   addClass() {
-    try {
-      window['TagCanvas'].Start('myCanvas', 'tags', {
+      TagCanvas.Start('myCanvas', 'tags', {
         textFont: 'Roboto',
         textColour: '#ff970c',
         outlineColour: '#08454a',
@@ -44,21 +30,43 @@ export class MyComponent {
         fadeIn: 800,
         maxSpeed: 0.05
       });
-    } catch (e) {
-      // something went wrong, hide the canvas container
-      document.getElementById('myCanvasContainer').style.display = 'none';
+  }
+
+  @State() arrayKeywords = [];
+
+  @Method() async getKeywords(){
+    MovieSearch.getWeightbyKeyword().then((response) =>{
+      let arr = [];
+      response.bindings.forEach((ob) => {
+        let json = {
+          weight: ob.count,
+          keyword: ob.label,
+          link: ob.keyword.$id
+        }
+
+        arr.push(json)
+      });
+      this.arrayKeywords = arr;
+    });
+  }
+
+  componentWillLoad() {
+    console.log('here');
+      this.getKeywords();
+  }
+
+  componentDidUpdate() {
+    if(this.arrayKeywords.length) {
+      this.addClass();
     }
   }
 
   render() {
-
-console.log(this.arrayKeywords.length);
     if(this.arrayKeywords.length > 0) {
-      console.log("render");
       return (
         <div>
           <div id="myCanvasContainer">
-            <canvas width="1000" height="300" id="myCanvas">
+            <canvas width="1000" height="500" id="myCanvas">
               <p>Anything in here will be replaced on browsers that support the canvas element</p>
             </canvas>
           </div>
@@ -71,11 +79,4 @@ console.log(this.arrayKeywords.length);
       );
     }
   }
-
-  componentDidRender () {
-    if(this.arrayKeywords.length > 0) {
-      console.log('did')
-      this.addClass(); 
-    }
-  }
-} 
+}
