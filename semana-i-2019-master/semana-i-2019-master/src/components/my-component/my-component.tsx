@@ -1,6 +1,5 @@
-import {Component, EventEmitter, h, Method, State} from '@stencil/core';
+import {Component, EventEmitter, h, Method, Prop, State} from '@stencil/core';
 import './Script.js';
-import MovieSearch from './MovieSearch';
 
 @Component({
   tag: 'my-component',
@@ -32,23 +31,7 @@ export class MyComponent {
     });
   }
 
-  @State() arrayKeywords = [];
-
-  @Method() async getKeywords(limit){
-    MovieSearch.getWeightbyKeyword(limit).then((response) =>{
-      let arr = [];
-      response.bindings.forEach((ob) => {
-        let json = {
-          weight: ob.count,
-          keyword: ob.label,
-          link: ob.keyword.$id
-        }
-
-        arr.push(json)
-      });
-      this.arrayKeywords = arr;
-    });
-  }
+  @Prop() arrayKeywords = [];
 
   @Event() onClickKeyword: EventEmitter;
 
