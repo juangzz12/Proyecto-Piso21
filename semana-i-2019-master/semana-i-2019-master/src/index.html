@@ -10,8 +10,31 @@
 
 </head>
 <body>
-
+<input type="number" id="myNumber" value="50">
+<button type="button" id="newSearch">submit</button>
 <my-component id="myComponent"></my-component>
+
+<script type="text/javascript">
+	
+	customElements.whenDefined("my-component").then(()=>{
+	      document.querySelector("#myComponent").componentOnReady().then((componentInstance) => {
+	      	componentInstance.getKeywords(50);
+	      });
+	    });
+
+	newSearch.addEventListener('click', (event) => {
+
+		var x = document.getElementById("myNumber");
+
+		customElements.whenDefined("my-component").then(()=>{
+	      document.querySelector("#myComponent").componentOnReady().then((componentInstance) => {
+	      	componentInstance.getKeywords(x.value);
+	      });
+	    });
+
+	});
+
+</script>
 
 </body>
 </html>

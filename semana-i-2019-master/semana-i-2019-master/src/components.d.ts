@@ -11,7 +11,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface MyComponent {
-    'getKeywords': () => Promise<void>;
+    'getKeywords': (limit: any) => Promise<void>;
   }
 }
 
