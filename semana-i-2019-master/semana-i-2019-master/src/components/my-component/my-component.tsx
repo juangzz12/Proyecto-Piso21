@@ -1,4 +1,4 @@
-import {Component, h, Method, State} from '@stencil/core';
+import {Component, EventEmitter, h, Method, State} from '@stencil/core';
 import './Script.js';
 import MovieSearch from './MovieSearch';
 
@@ -10,33 +10,32 @@ import MovieSearch from './MovieSearch';
 export class MyComponent {
 
   addClass() {
-      TagCanvas.Start('myCanvas', 'tags', {
-        textFont: 'Roboto',
-        textColour: '#ff970c',
-        outlineColour: '#08454a',
-        reverse: true,
-        depth: 2,
-        interval: 20,
-        minBrightness: 0.1,
-        pulsateTo: 0.2,
-        pulsateTime: 0.75,
-        initial: [0.1, -0.1],
-        decel: 0.98,
-        hideTags: false,
-        shadow: '#ccf',
-        shadowBlur: 3,
-        weight: true,
-        weightFrom: 'data-weight',
-        fadeIn: 800,
-        maxSpeed: 0.05
-      });
+    TagCanvas.Start('myCanvas', 'tags', {
+      textFont: 'Roboto',
+      textColour: '#ff970c',
+      outlineColour: '#08454a',
+      reverse: true,
+      depth: 2,
+      interval: 20,
+      minBrightness: 0.1,
+      pulsateTo: 0.2,
+      pulsateTime: 0.75,
+      initial: [0.1, -0.1],
+      decel: 0.98,
+      hideTags: false,
+      shadow: '#ccf',
+      shadowBlur: 3,
+      weight: true,
+      weightFrom: 'data-weight',
+      fadeIn: 800,
+      maxSpeed: 0.05
+    });
   }
 
   @State() arrayKeywords = [];
 
-  @Method() async getKeywords(){
-    MovieSearch.getWeightbyKeyword().then((response) =>{
-      console.log(response);
+  @Method() async getKeywords() {
+    MovieSearch.getWeightbyKeyword().then((response) => {
       let arr = [];
       response.bindings.forEach((ob) => {
         let json = {
@@ -51,18 +50,24 @@ export class MyComponent {
     });
   }
 
+  @Event() onClickKeyword: EventEmitter;
+
+  private outputKeyword(item){
+    this.onClickKeyword.emit(item);
+  }
+
   componentWillLoad() {
-      this.getKeywords();
+    this.getKeywords();
   }
 
   componentDidUpdate() {
-    if(this.arrayKeywords.length) {
+    if (this.arrayKeywords.length) {
       this.addClass();
     }
   }
 
   render() {
-    if(this.arrayKeywords.length > 0) {
+    if (this.arrayKeywords.length > 0) {
       return (
         <div>
           <div id="myCanvasContainer">
@@ -72,10 +77,15 @@ export class MyComponent {
           </div>
           <div id="tags">
             <ul>
-              {this.arrayKeywords.map((item) => (<li><a href={item.link} data-weight={item.weight}>{item.keyword}</a></li>))}
+              {this.arrayKeywords.map((item) => (
+                <li><a onClick={(event) => {
+                  event.preventDefault();
+                  this.outputKeyword(item.link)
+                }} data-weight={item.weight}>{item.keyword}</a></li>))}
             </ul>
           </div>
         </div>
       );
+    }
   }
 }
