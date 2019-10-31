@@ -10,33 +10,29 @@
 
 </head>
 <body>
-<input type="number" id="myNumber" value="50">
-<button type="button" id="newSearch">submit</button>
+  <select name="list" id="listSize">
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option selected="selected" value="30">30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>
+  </select>
 <my-component id="myComponent"></my-component>
 
 <script type="text/javascript">
-
-	customElements.whenDefined("my-component").then(()=>{
-	      document.querySelector("#myComponent").componentOnReady().then((componentInstance) => {
-	      	componentInstance.getKeywords(50);
-	      	componentInstance.addEventListener("onClickKeyword", (ev) => {console.log(ev.detail)});
-        });
-	    });
-
-	newSearch.addEventListener('click', (event) => {
-
-		var x = document.getElementById("myNumber");
-
+	updateRender(30);
+	function updateRender(howMany){
 		customElements.whenDefined("my-component").then(()=>{
 	      document.querySelector("#myComponent").componentOnReady().then((componentInstance) => {
-	      	componentInstance.getKeywords(x.value);
+	      	componentInstance.getKeywords(howMany);
 	      });
 	    });
-
-	});
-
+	}
+	listSize.onchange= function(){
+		var x = document.getElementById("listSize");
+		updateRender(x.value);
+	};
 </script>
-
 
 </body>
 </html>
