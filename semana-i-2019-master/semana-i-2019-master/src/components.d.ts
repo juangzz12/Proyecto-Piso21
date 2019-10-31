@@ -11,8 +11,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface MyComponent {
-    'printConsoleLog': () => Promise<void>;
-    'waitingForData': (keyword: any[]) => Promise<void>;
+    'getKeywords': () => Promise<void>;
   }
 }
 
