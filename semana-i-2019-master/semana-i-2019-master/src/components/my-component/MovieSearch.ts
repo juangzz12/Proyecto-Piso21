@@ -16,7 +16,7 @@ export default class MovieSearch {
             }
             GROUP BY ?keyword ?label
             ORDER BY DESC(?count)
-            LIMIT 30
+            LIMIT 50
             `
         )
     }

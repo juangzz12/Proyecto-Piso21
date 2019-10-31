@@ -72,7 +72,7 @@ export class MyComponent {
           </div>
           <div id="tags">
             <ul>
-              {this.arrayKeywords.map((item) => (<li><a href={item.link} data-weight={item.weight*.1}>{item.keyword}</a></li>))}
+              {this.arrayKeywords.map((item) => (<li><a href={item.link} data-weight={item.weight*.1+10}>{item.keyword}</a></li>))}
             </ul>
           </div>
         </div>
