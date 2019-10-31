@@ -7,6 +7,7 @@
 
   <script type="module" src="/build/semana-i-2019.esm.js"></script>
   <script nomodule src="/build/semana-i-2019.js"></script>
+  <script src="assets/bundle.js"></script>
 
 </head>
 <body>
@@ -24,7 +25,9 @@
 	function updateRender(howMany){
 		customElements.whenDefined("my-component").then(()=>{
 	      document.querySelector("#myComponent").componentOnReady().then((componentInstance) => {
-	      	componentInstance.getKeywords(howMany);
+	          window.MovieSearch.default(howMany).then((result) => {
+	              componentInstance.arrayKeywords = result;
+            });
             componentInstance.addEventListener("onClickKeyword", (ev) => {console.log(ev.detail)});
         });
 	    });

@@ -11,7 +11,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface MyComponent {
-    'getKeywords': (limit: any) => Promise<void>;
+    'arrayKeywords': any[];
   }
 }
 
@@ -30,6 +30,7 @@ declare global {
 
 declare namespace LocalJSX {
   interface MyComponent {
+    'arrayKeywords'?: any[];
     'onOnClickKeyword'?: (event: CustomEvent<any>) => void;
   }
 
