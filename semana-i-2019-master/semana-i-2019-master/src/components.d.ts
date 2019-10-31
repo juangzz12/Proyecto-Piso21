@@ -11,7 +11,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface MyComponent {
-    'getKeywords': () => Promise<void>;
+    'getKeywords': (limit: any) => Promise<void>;
   }
 }
 
@@ -29,9 +29,7 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface MyComponent {
-    'onOnClickKeyword'?: (event: CustomEvent<any>) => void;
-  }
+  interface MyComponent {}
 
   interface IntrinsicElements {
     'my-component': MyComponent;

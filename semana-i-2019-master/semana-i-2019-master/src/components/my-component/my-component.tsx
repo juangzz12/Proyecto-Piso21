@@ -34,8 +34,8 @@ export class MyComponent {
 
   @State() arrayKeywords = [];
 
-  @Method() async getKeywords() {
-    MovieSearch.getWeightbyKeyword().then((response) => {
+  @Method() async getKeywords(limit){
+    MovieSearch.getWeightbyKeyword(limit).then((response) =>{
       let arr = [];
       response.bindings.forEach((ob) => {
         let json = {
@@ -48,16 +48,6 @@ export class MyComponent {
       });
       this.arrayKeywords = arr;
     });
-  }
-
-  @Event() onClickKeyword: EventEmitter;
-
-  private outputKeyword(item){
-    this.onClickKeyword.emit(item);
-  }
-
-  componentWillLoad() {
-    this.getKeywords();
   }
 
   componentDidUpdate() {
