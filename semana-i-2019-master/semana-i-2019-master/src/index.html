@@ -15,7 +15,7 @@
 <script>
     customElements.whenDefined("my-component").then(()=>{
         document.querySelector("#myComponent").componentOnReady().then((componentInstance) => {
-            componentInstance.addEventListener("onClickKeyword", (ev) => {console.log(ev)});
+            componentInstance.addEventListener("onClickKeyword", (ev) => {console.log(ev.detail)});
         });
     });
 </script>

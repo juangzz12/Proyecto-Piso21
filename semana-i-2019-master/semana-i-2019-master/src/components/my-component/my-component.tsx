@@ -81,7 +81,7 @@ export class MyComponent {
                 <li><a onClick={(event) => {
                   event.preventDefault();
                   this.outputKeyword(item.link)
-                }} data-weight={item.weight}>{item.keyword}</a></li>))}
+                }} data-weight={item.weight*.1 + 10}>{item.keyword}</a></li>))}
             </ul>
           </div>
         </div>
