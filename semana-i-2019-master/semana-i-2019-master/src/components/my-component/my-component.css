@@ -1,7 +1,7 @@
 #myCanvasContainer {
-  background: #FFF;
+  background: #000;
   width: 1000px;
-  height: 300px;
+  height: 500px;
   border-radius: 10px;
 }
 ul {

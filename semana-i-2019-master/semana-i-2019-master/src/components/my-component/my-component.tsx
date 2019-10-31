@@ -36,6 +36,7 @@ export class MyComponent {
 
   @Method() async getKeywords(){
     MovieSearch.getWeightbyKeyword().then((response) =>{
+      console.log(response);
       let arr = [];
       response.bindings.forEach((ob) => {
         let json = {
@@ -51,7 +52,6 @@ export class MyComponent {
   }
 
   componentWillLoad() {
-    console.log('here');
       this.getKeywords();
   }
 
@@ -72,7 +72,7 @@ export class MyComponent {
           </div>
           <div id="tags">
             <ul>
-              {this.arrayKeywords.map((item) => (<li><a href={item.link} data-weight={item.weight*.1}>{item.keyword}</a></li>))}
+              {this.arrayKeywords.map((item) => (<li><a href={item.link} data-weight={item.weight}>{item.keyword}</a></li>))}
             </ul>
           </div>
         </div>
