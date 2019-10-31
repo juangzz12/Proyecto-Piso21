@@ -29,7 +29,9 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface MyComponent {}
+  interface MyComponent {
+    'onOnClickKeyword'?: (event: CustomEvent<any>) => void;
+  }
 
   interface IntrinsicElements {
     'my-component': MyComponent;

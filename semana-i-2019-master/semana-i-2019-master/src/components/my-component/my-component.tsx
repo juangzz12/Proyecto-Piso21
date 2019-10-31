@@ -50,6 +50,12 @@ export class MyComponent {
     });
   }
 
+  @Event() onClickKeyword: EventEmitter;
+
+  private outputKeyword(item){
+    this.onClickKeyword.emit(item);
+  }
+
   componentDidUpdate() {
     if (this.arrayKeywords.length) {
       this.addClass();
